@@ -2,11 +2,12 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import random
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 
 # Load dataset function
 def load_data(file):
-    data = pd.read_csv(file)
+    file_path = "flowshop_scheduling_dataset.csv"
+    data = pd.read_csv(file_path)
     job_dict = data.set_index('Job_ID').to_dict('index')
     return data, job_dict
 
@@ -74,18 +75,16 @@ def evolutionary_strategies(data, job_dict, lambda_offspring, pop_size=50, mutat
 # Streamlit app
 st.header("Evolutionary Strategies for Job Scheduling a Flow Shop Manufacturing", divider="gray")
 
-# File uploader
-data_file = st.file_uploader("Upload your dataset (CSV format)", type=["csv"])
-if data_file is not None:
-    data, job_dict = load_data(data_file)
-    st.write("Dataset Preview:")
-    st.dataframe(data.head())
+# Load your dataset
+data, job_dict = load_data()
+st.write("Dataset Preview:")
+st.dataframe(data.head())
 
-    # Parameters
-    lambda_offspring = st.slider("Lambda Offspring:", 10, 100, 35)
-    pop_size = st.slider("Population Size:", 10, 100, 50)
-    mutation_rate = st.slider("Mutation Rate:", 0.0, 1.0, 0.2, step=0.05)
-    generations = st.slider("Generations:", 10, 200, 100)
+# Parameters
+lambda_offspring = st.slider("Lambda Offspring:", 10, 100, 35)
+pop_size = st.slider("Population Size:", 10, 100, 50)
+mutation_rate = st.slider("Mutation Rate:", 0.0, 1.0, 0.2, step=0.05)
+generations = st.slider("Generations:", 10, 200, 100)
 
     # Run algorithm
     if st.button("Run Evolutionary Strategies"):
