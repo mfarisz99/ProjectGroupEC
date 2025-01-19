@@ -72,7 +72,7 @@ def evolutionary_strategies(data, job_dict, lambda_offspring, pop_size=50, mutat
     return best_schedule, fitness_trends
 
 # Streamlit app
-st.title("Evolutionary Strategies for Job Scheduling")
+st.header("Evolutionary Strategies for Job Scheduling a Flow Shop Manufacturing", divider="gray")
 
 # File uploader
 data_file = st.file_uploader("Upload your dataset (CSV format)", type=["csv"])
