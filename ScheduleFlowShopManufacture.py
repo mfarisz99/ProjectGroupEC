@@ -75,7 +75,7 @@ def evolutionary_strategies(data, job_dict, lambda_offspring, pop_size=50, mutat
 st.header("Evolutionary Strategies for Job Scheduling a Flow Shop Manufacturing", divider="gray")
 
 # File uploader
-data_file = st.flowshop_scheduling_dataset.csv("Upload your dataset (CSV format)", type=["csv"])
+data_file = st.file_uploader("Upload your dataset (CSV format)", type=["csv"])
 if data_file is not None:
     data, job_dict = load_data(data_file)
     st.write("Dataset Preview:")
