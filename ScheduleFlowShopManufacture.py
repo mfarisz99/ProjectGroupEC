@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 # Load dataset function
 def load_data(file):
-    file_path = "flowshop_scheduling_dataset.csv"
+    file_path = "./flowshop_scheduling_dataset.csv"
     data = pd.read_csv(file_path)
     job_dict = data.set_index('Job_ID').to_dict('index')
     return data, job_dict
