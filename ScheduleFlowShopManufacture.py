@@ -5,14 +5,14 @@ import random
 import matplotlib.pyplot as plt
 
 # Load dataset function
-def load_data(file):
-    file_path = "flowshop_scheduling_dataset.csv"
-    dtry:
+def load_data(file_path):
+    try:
         data = pd.read_csv(file_path)
         job_dict = data.set_index('Job_ID').to_dict('index')
         return data, job_dict
     except FileNotFoundError:
-        raise FileNotFoundError(f"Dataset not found at {file_path}. Please check the file path.")
+        st.error(f"Dataset not found at {file_path}. Please check the file path.")
+        return None, None
 
 # Fitness function
 def calculate_fitnessMO(route, job_dict):
@@ -76,41 +76,44 @@ def evolutionary_strategies(data, job_dict, lambda_offspring, pop_size=50, mutat
     return best_schedule, fitness_trends
 
 # Streamlit app
-st.header("Evolutionary Strategies for Job Scheduling a Flow Shop Manufacturing", divider="gray")
+st.header("Evolutionary Strategies for Job Scheduling in Flow Shop Manufacturing", divider="gray")
 
-# Load your dataset
-data, job_dict = load_data()
-st.write("Dataset Preview:")
-st.dataframe(data.head())
+# File input
+file_path = st.text_input("Enter dataset file path:", value="flowshop_scheduling_dataset.csv")
+if file_path:
+    data, job_dict = load_data(file_path)
+    if data is not None:
+        st.write("Dataset Preview:")
+        st.dataframe(data.head())
 
-# Parameters
-lambda_offspring = st.slider("Lambda Offspring:", 10, 100, 35)
-pop_size = st.slider("Population Size:", 10, 100, 50)
-mutation_rate = st.slider("Mutation Rate:", 0.0, 1.0, 0.2, step=0.05)
-generations = st.slider("Generations:", 10, 200, 100)
+        # Parameters
+        lambda_offspring = st.slider("Lambda Offspring:", 10, 100, 35)
+        pop_size = st.slider("Population Size:", 10, 100, 50)
+        mutation_rate = st.slider("Mutation Rate:", 0.0, 1.0, 0.2, step=0.05)
+        generations = st.slider("Generations:", 10, 200, 100)
 
-    # Run algorithm
-if st.button("Run Evolutionary Strategies"):
-    with st.spinner("Running Evolutionary Strategies..."):
-        best_schedule, fitness_trends = evolutionary_strategies(
-            data, job_dict, lambda_offspring, pop_size, mutation_rate, generations
-        )
+        # Run algorithm
+        if st.button("Run Evolutionary Strategies"):
+            with st.spinner("Running Evolutionary Strategies..."):
+                best_schedule, fitness_trends = evolutionary_strategies(
+                    data, job_dict, lambda_offspring, pop_size, mutation_rate, generations
+                )
 
-    st.success("Algorithm completed!")
-    st.write("Best Job Schedule:")
-    st.write(best_schedule)
+            st.success("Algorithm completed!")
+            st.write("Best Job Schedule:")
+            st.write(best_schedule)
 
-    st.write("Best Fitness Value:", fitness_trends[-1])
+            st.write("Best Fitness Value:", fitness_trends[-1])
 
-    # Plot fitness trends
-    st.write("Fitness Trends:")
-    fig, ax = plt.subplots()
-    ax.plot(range(1, len(fitness_trends) + 1), fitness_trends, marker='o', linestyle='-', color='b')
-    ax.set_title("Fitness Trends Over Generations")
-    ax.set_xlabel("Generation")
-    ax.set_ylabel("Best Fitness")
-    ax.grid(alpha=0.4)
-    st.pyplot(fig)
+            # Plot fitness trends
+            st.write("Fitness Trends:")
+            fig, ax = plt.subplots()
+            ax.plot(range(1, len(fitness_trends) + 1), fitness_trends, marker='o', linestyle='-', color='b')
+            ax.set_title("Fitness Trends Over Generations")
+            ax.set_xlabel("Generation")
+            ax.set_ylabel("Best Fitness")
+            ax.grid(alpha=0.4)
+            st.pyplot(fig)
 
 st.markdown("---")
 st.markdown("Developed with Streamlit and Python")
