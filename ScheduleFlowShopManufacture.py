@@ -6,10 +6,13 @@ import matplotlib.pyplot as plt
 
 # Load dataset function
 def load_data(file):
-    file_path = "./flowshop_scheduling_dataset.csv"
-    data = pd.read_csv(file_path)
-    job_dict = data.set_index('Job_ID').to_dict('index')
-    return data, job_dict
+    file_path = "flowshop_scheduling_dataset.csv"
+    dtry:
+        data = pd.read_csv(file_path)
+        job_dict = data.set_index('Job_ID').to_dict('index')
+        return data, job_dict
+    except FileNotFoundError:
+        raise FileNotFoundError(f"Dataset not found at {file_path}. Please check the file path.")
 
 # Fitness function
 def calculate_fitnessMO(route, job_dict):
