@@ -87,27 +87,27 @@ mutation_rate = st.slider("Mutation Rate:", 0.0, 1.0, 0.2, step=0.05)
 generations = st.slider("Generations:", 10, 200, 100)
 
     # Run algorithm
-    if st.button("Run Evolutionary Strategies"):
-        with st.spinner("Running Evolutionary Strategies..."):
-            best_schedule, fitness_trends = evolutionary_strategies(
-                data, job_dict, lambda_offspring, pop_size, mutation_rate, generations
-            )
+if st.button("Run Evolutionary Strategies"):
+    with st.spinner("Running Evolutionary Strategies..."):
+        best_schedule, fitness_trends = evolutionary_strategies(
+            data, job_dict, lambda_offspring, pop_size, mutation_rate, generations
+        )
 
-        st.success("Algorithm completed!")
-        st.write("Best Job Schedule:")
-        st.write(best_schedule)
+    st.success("Algorithm completed!")
+    st.write("Best Job Schedule:")
+    st.write(best_schedule)
 
-        st.write("Best Fitness Value:", fitness_trends[-1])
+    st.write("Best Fitness Value:", fitness_trends[-1])
 
-        # Plot fitness trends
-        st.write("Fitness Trends:")
-        fig, ax = plt.subplots()
-        ax.plot(range(1, len(fitness_trends) + 1), fitness_trends, marker='o', linestyle='-', color='b')
-        ax.set_title("Fitness Trends Over Generations")
-        ax.set_xlabel("Generation")
-        ax.set_ylabel("Best Fitness")
-        ax.grid(alpha=0.4)
-        st.pyplot(fig)
+    # Plot fitness trends
+    st.write("Fitness Trends:")
+    fig, ax = plt.subplots()
+    ax.plot(range(1, len(fitness_trends) + 1), fitness_trends, marker='o', linestyle='-', color='b')
+    ax.set_title("Fitness Trends Over Generations")
+    ax.set_xlabel("Generation")
+    ax.set_ylabel("Best Fitness")
+    ax.grid(alpha=0.4)
+    st.pyplot(fig)
 
 st.markdown("---")
 st.markdown("Developed with Streamlit and Python")
