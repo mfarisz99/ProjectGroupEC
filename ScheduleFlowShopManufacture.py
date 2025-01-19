@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import random
-import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt
 
 # Load dataset function
 def load_data(file):
