@@ -123,4 +123,5 @@ if data is not None:
         st.pyplot(fig)
 
 st.markdown("---")
-st.markdown("Developed with Streamlit and Python")
+st.markdown("Reasons why this algorithm is the best to use:
+dsadsa")
