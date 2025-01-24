@@ -123,5 +123,5 @@ if data is not None:
         st.pyplot(fig)
 
 st.markdown("---")
-st.markdown("Reasons why this algorithm is the best to use:
-dsadsa")
+st.markdown("This algorithm is used for flow shop scheduling because it efficiently handles the large number of possible job sequences, quickly finding high-quality solutions without needing to try every option. It works well with complex factors like setup times, due dates, and penalties, while avoiding being stuck in bad solutions. Its speed and flexibility make it practical for real-world manufacturing to optimize schedules and improve productivity.")
+
