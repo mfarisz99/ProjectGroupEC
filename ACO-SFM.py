@@ -138,4 +138,4 @@ if st.button("Run Ant Colony Optimization"):
 
     # Footer
     st.markdown("---")
-    st.markdown("Developed with Streamlit and Python")
+    st.markdown("Ant Colony Optimization (ACO) is well-suited for flow shop scheduling because it mimics the natural foraging behavior of ants to find the shortest path, which aligns with finding optimal schedules. In a flow shop environment, where multiple jobs are processed across multiple machines, ACO can efficiently explore the vast solution space and optimize the sequencing of jobs to minimize completion time and penalties. ACO’s ability to adaptively adjust pheromone levels allows it to find high-quality solutions over generations, making it ideal for dynamic and complex scheduling problems like this, where multiple constraints (e.g., setup time, processing time, and penalties) must be considered.")
