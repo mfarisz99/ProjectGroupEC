@@ -120,6 +120,16 @@ if st.button("Run Ant Colony Optimization"):
         best_solution, fitness_trends = ant_colony_optimization()
 
     st.success("ACO Algorithm Completed!")
+    
+    # Display Fixed Parameters Used
+    st.write("### Fixed Parameters Used:")
+    st.write(f"Number of Ants: {NUM_ANTS}")
+    st.write(f"Number of Iterations: {NUM_ITERATIONS}")
+    st.write(f"Mutation Rate: {MUT_RATE}")
+    st.write(f"Pheromone Importance (Alpha): {ALPHA}")
+    st.write(f"Heuristic Importance (Beta): {BETA}")
+    st.write(f"Pheromone Evaporation Rate: {EVAPORATION_RATE}")
+    st.write(f"Pheromone Deposit Factor (Q): {Q}")
 
     # Display Best Solution
     st.write("Best Solution:")
