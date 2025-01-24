@@ -11,6 +11,15 @@ data = pd.read_csv("flowshop_scheduling_dataset.csv")
 st.write("Dataset Preview:")
 st.dataframe(data.head())
 
+# Parameters
+NUM_ANTS = 50
+NUM_ITERATIONS = 100
+ALPHA = 1  # Pheromone importance
+BETA = 2   # Heuristic importance
+EVAPORATION_RATE = 0.5
+Q = 100  # Pheromone deposit factor
+MUT_RATE = 0.2  # Mutation rate
+
 # Display Fixed Parameters Used
 st.write("### Fixed Parameters Used:")
 st.write(f"Number of Ants: {NUM_ANTS}")
@@ -20,15 +29,6 @@ st.write(f"Pheromone Importance (Alpha): {ALPHA}")
 st.write(f"Heuristic Importance (Beta): {BETA}")
 st.write(f"Pheromone Evaporation Rate: {EVAPORATION_RATE}")
 st.write(f"Pheromone Deposit Factor (Q): {Q}")
-
-# Parameters
-NUM_ANTS = 50
-NUM_ITERATIONS = 100
-ALPHA = 1  # Pheromone importance
-BETA = 2   # Heuristic importance
-EVAPORATION_RATE = 0.5
-Q = 100  # Pheromone deposit factor
-MUT_RATE = 0.2  # Mutation rate
 
 # Define bounds for optimization
 bounds = {
