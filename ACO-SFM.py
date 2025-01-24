@@ -108,6 +108,9 @@ def ant_colony_optimization(data, job_dict, num_ants=10, num_iterations=100, alp
                 end = jobs.index(route[i + 1])
                 pheromone[start, end] += 1 / fitness  # Deposit pheromones based on fitness
 
+        # Store the best fitness trend for plotting
+        fitness_trends.append(best_fitness)
+
     return best_route, best_fitness
 
 # Streamlit app
@@ -118,6 +121,12 @@ data, job_dict = load_data()
 if data is not None:
     st.write("Dataset Preview:")
     st.dataframe(data)
+
+     # Display fixed parameters
+    st.write("**Fixed Parameters:**")
+    st.write("Mutation Rate: 0.2")
+    st.write("Population Size: 50")
+    st.write("Generations: 100")
 
     # Run algorithm
     if st.button("Run Ant Colony Optimization"):
