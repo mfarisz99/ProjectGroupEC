@@ -4,6 +4,8 @@ import numpy as np
 import random
 import matplotlib.pyplot as plt
 
+st.header("Ant Colony Optimization (ACO) for Flow Shop Scheduling")
+
 # Load dataset (hardcoded dataset)
 data = pd.read_csv("flowshop_scheduling_dataset.csv")
 st.write("Dataset Preview:")
@@ -110,7 +112,7 @@ def ant_colony_optimization():
     return best_solution, fitness_trends
 
 # Streamlit App UI
-st.header("Ant Colony Optimization (ACO) for Flow Shop Scheduling")
+
 
 if st.button("Run Ant Colony Optimization"):
     with st.spinner("Running ACO Algorithm..."):
