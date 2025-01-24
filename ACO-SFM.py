@@ -53,6 +53,7 @@ def ant_colony_optimization(data, job_dict, num_ants=10, num_iterations=100, alp
     pheromone = np.ones((num_jobs, num_jobs))
     best_route = None
     best_fitness = float("inf")
+    fitness_trends = []
 
     for iteration in range(num_iterations):
         all_routes = []
@@ -111,7 +112,7 @@ def ant_colony_optimization(data, job_dict, num_ants=10, num_iterations=100, alp
         # Store the best fitness trend for plotting
         fitness_trends.append(best_fitness)
 
-    return best_route, best_fitness
+    return best_route, best_fitness, fitness_trends
 
 # Streamlit app
 st.header("Ant Colony Optimization for Flow Shop Scheduling", divider="gray")
@@ -122,7 +123,7 @@ if data is not None:
     st.write("Dataset Preview:")
     st.dataframe(data)
 
-     # Display fixed parameters
+    # Display fixed parameters
     st.write("**Fixed Parameters:**")
     st.write("Mutation Rate: 0.2")
     st.write("Population Size: 50")
@@ -131,7 +132,7 @@ if data is not None:
     # Run algorithm
     if st.button("Run Ant Colony Optimization"):
         with st.spinner("Running Ant Colony Optimization..."):
-            best_schedule, best_fitness = ant_colony_optimization(
+            best_schedule, best_fitness, fitness_trends = ant_colony_optimization(
                 data, job_dict, num_ants=10, num_iterations=100, alpha=1, beta=2, evaporation_rate=0.5
             )
 
@@ -141,7 +142,16 @@ if data is not None:
 
         st.write("**Best Fitness Value:**", best_fitness)
 
+        # Plot fitness trends
+        st.write("**Fitness Trends Over Generations:**")
+        fig, ax = plt.subplots()
+        ax.plot(range(1, len(fitness_trends) + 1), fitness_trends, marker='o', linestyle='-', color='b')
+        ax.set_title("Fitness Trends Over Generations")
+        ax.set_xlabel("Generation")
+        ax.set_ylabel("Best Fitness Value")
+        ax.grid(alpha=0.4)
+        st.pyplot(fig)
+
         # Show divider after button is pressed
         st.markdown("---")
-
-    st.markdown("Developed with Streamlit and Python")
+        st.markdown("Developed with Streamlit and Python")
